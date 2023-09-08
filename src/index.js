@@ -1,4 +1,5 @@
 // 類=>模板
+/*
 class Person {
   constructor(name, age) {
     this.name = name;
@@ -11,18 +12,119 @@ class Person {
     alert(`${this.name} is speaking.`);
   }
 }
+*/
 
 // 對象=>實例
+/*
 const leon = new Person("leon", 30);
 leon.eat();
+*/
 
+// ----------------------------------------------
+
+// 繼承：
 // 子類繼承父類
+/*
 class Student extends Person {
   constructor(name, age, number) {
-    super(name, age);
-    this.number = number;
+    super(name, age); // 繼承的屬性用 super()接收
+    this.number = number; // 只有 Student 才有的屬性
   }
   study() {
     alert(`${this.name} is studying.`);
   }
 }
+*/
+
+// 創建實例
+/*
+let alex = new Student("alex", 22, "A1");
+let jack = new Student("jack", 25, "A2");
+alex.study();
+alex.eat();
+jack.speak();
+console.log(alex.number);
+*/
+
+// ----------------------------------------------
+
+// 封裝：
+// 在這裡運行TS https://www.typescriptlang.org/play
+// 父類
+/*
+class People {
+  name:string // TS 需要先聲明變數，默認是 public
+  age:number  // TS 需要先聲明變數，默認是 public
+  protected weight:number // 受保護的屬性，只有自己或子類可以訪問
+
+  constructor(name:string, age:number){
+    this.name = name
+    this.age = age
+    this.weight = 80
+  }
+  eat() {
+    alert(`${this.name} is eat something.`);
+  }
+  speak() {
+    alert(`${this.name} is speaking.`);
+  }
+}
+*/
+
+// 子類
+/*
+class Student extends People {
+  number:string
+  private girlfriend:string
+  constructor(name:string, age:number, number:string){
+    super(name, age)
+    this.number = number
+    this.girlfriend = 'lisa'
+  }
+  study() {
+    alert(`${this.name} is studying.`);
+  }
+  getWeight(){
+    alert(`Weight: ${this.weight}.`);
+  }
+}
+*/
+
+/*
+let alex = new Student("alex", 22, "A1");
+alex.getWeight()
+*/
+
+// 多型
+// 父類
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  saySomething() {}
+}
+
+// 子類
+class A extends Person {
+  constructor(name) {
+    super(name);
+  }
+  saySomething() {
+    alert("I am A");
+  }
+}
+
+// 子類
+class B extends Person {
+  constructor(name) {
+    super(name);
+  }
+  saySomething() {
+    alert("I am B");
+  }
+}
+
+let a = new A("a");
+let b = new B("b");
+a.saySomething();
+b.saySomething();
