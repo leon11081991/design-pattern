@@ -97,14 +97,17 @@ alex.getWeight()
 
 // 多型
 // 父類
+/*
 class Person {
   constructor(name) {
     this.name = name;
   }
   saySomething() {}
 }
+*/
 
 // 子類
+/*
 class A extends Person {
   constructor(name) {
     super(name);
@@ -113,8 +116,10 @@ class A extends Person {
     alert("I am A");
   }
 }
+*/
 
 // 子類
+/*
 class B extends Person {
   constructor(name) {
     super(name);
@@ -123,8 +128,50 @@ class B extends Person {
     alert("I am B");
   }
 }
+*/
 
+/*
 let a = new A("a");
 let b = new B("b");
 a.saySomething();
 b.saySomething();
+*/
+
+// UML 關聯
+// 父類
+class Person {
+  constructor(name, house) {
+    this.name = name;
+    this.house = house;
+  }
+  saySomething() {}
+}
+
+// 子類
+class A extends Person {
+  constructor(name, house) {
+    super(name, house);
+  }
+  saySomething() {
+    alert("I am A");
+  }
+}
+
+// 子類
+class B extends Person {
+  constructor(name, house) {
+    super(name, house);
+  }
+  saySomething() {
+    alert("I am B");
+  }
+}
+
+class House {
+  constructor(city) {
+    this.city = city;
+  }
+}
+
+let aHouse = new House("台北市");
+let a = new A("a", aHouse);
