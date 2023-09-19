@@ -180,6 +180,7 @@ let a = new A("a", aHouse);
 
 // 單一職責原則
 // 開放封閉原則
+/*
 function loadImg(src) {
   let promise = new Promise(function (resolve, reject) {
     let img = document.createElement("img");
@@ -211,3 +212,42 @@ result
   .catch(function (error) {
     alert(error);
   });
+*/
+
+class Car {
+  constructor(name, number) {
+    this.name = name;
+    this.number = number;
+  }
+}
+
+class Fast extends Car {
+  constructor(name, number) {
+    super(name, number);
+    this.price = 1;
+  }
+}
+
+class Custom extends Car {
+  constructor(name, number) {
+    super(name, number);
+    this.price = 2;
+  }
+}
+
+class Trip {
+  constructor(car) {
+    this.car = car;
+  }
+  start() {
+    console.log(`該車名稱：${this.car.name}，該車號碼：${this.car.number}`);
+  }
+  end() {
+    console.log(`總金額：${this.car.price * 5}`);
+  }
+}
+
+let car = new Fast("快車", 100);
+let trip = new Trip(car);
+trip.start();
+trip.end();
