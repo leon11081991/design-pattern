@@ -214,6 +214,7 @@ result
   });
 */
 
+/*
 class Car {
   constructor(name, number) {
     this.name = name;
@@ -251,3 +252,119 @@ let car = new Fast("快車", 100);
 let trip = new Trip(car);
 trip.start();
 trip.end();
+*/
+
+/*
+// 車子
+class Car {
+  constructor(number) {
+    this.number = number;
+  }
+}
+// 層
+class Floor {
+  constructor(level, parkcells) {
+    this.level = level;
+    this.parkcells = parkcells || []; // 停放格數量
+  }
+  emptyParkCellNum() {
+    let num = 0;
+    this.parkcells.forEach((cell) => {
+      if (cell.empty) {
+        num = num + 1;
+      }
+    });
+    return num;
+  }
+}
+// 車位
+class ParkCell {
+  constructor() {
+    this.empty = true;
+  }
+  in() {
+    this.empty = false;
+  }
+  out() {
+    this.empty = true;
+  }
+}
+
+// 攝影機
+class Camera {
+  shot(car) {
+    return {
+      num: car.number,
+      inTime: Date.now(),
+    };
+  }
+}
+
+// 螢幕
+class Monitor {
+  show(car, inTime) {
+    console.log(`車號： ${car.number}`);
+    console.log(`停出時間： ${Date.now() - inTime}`);
+  }
+}
+
+// 停車場
+class Park {
+  constructor(floors) {
+    this.floors = floors || [];
+    this.camera = new Camera();
+    this.monitor = new Monitor();
+    this.carList = {}; // 儲存攝影機拍攝返回的車輛訊息
+  }
+  in(car) {
+    // 通過攝影機獲取訊息
+    const info = this.camera.shot(car);
+    // 停到某個停車位
+    const index = parseInt((Math.random() * 100) % 100);
+    const parkcell = this.floors[0].parkcells[index];
+    parkcell.in();
+    info.parkcell = parkcell;
+    this.carList[car.number] = info;
+  }
+  out(car) {
+    const info = this.carList[car.number];
+    const parkcell = info.parkcell;
+    parkcell.out();
+    this.monitor.show(car, info.inTime);
+    delete this.carList[car.number];
+  }
+  emptyNum() {
+    return this.floors
+      .map((floor) => {
+        return `${floor.level}層，還有 ${floor.parkcells.length}個停車位`;
+      })
+      .join("\n");
+  }
+}
+
+const floors = [];
+for (let i = 0; i < 3; i++) {
+  const parkcell = [];
+  for (let j = 0; j < 100; j++) {
+    parkcell[j] = new ParkCell();
+  }
+  floors[i] = new Floor(i + 1, parkcell);
+}
+
+const park = new Park(floors);
+
+const car1 = new Car(100);
+const car2 = new Car(200);
+const car3 = new Car(300);
+
+console.log("第一輛車進入");
+console.log(park.emptyNum());
+park.in(car1);
+console.log("第二輛車進入");
+console.log(park.emptyNum());
+park.in(car2);
+console.log("第一輛車離開");
+park.out(car1);
+console.log("第二輛車離開");
+park.out(car2);
+*/
