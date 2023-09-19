@@ -139,6 +139,7 @@ b.saySomething();
 
 // UML 關聯
 // 父類
+/*
 class Person {
   constructor(name, house) {
     this.name = name;
@@ -175,3 +176,38 @@ class House {
 
 let aHouse = new House("台北市");
 let a = new A("a", aHouse);
+*/
+
+// 單一職責原則
+// 開放封閉原則
+function loadImg(src) {
+  let promise = new Promise(function (resolve, reject) {
+    let img = document.createElement("img");
+    img.onload = function () {
+      resolve(img);
+    };
+    img.onerror = function () {
+      reject("圖片讀取失敗");
+    };
+    img.src = src;
+  });
+  return promise;
+}
+
+let src =
+  "https://d33wubrfki0l68.cloudfront.net/4af430fdfd803898be710ba089d17db28cd78bfa/3a8ae/img/javascript/hasownprop_for_obj_of_class.png";
+let result = loadImg(src);
+
+result
+  .then(function (img) {
+    // 第一個功能
+    alert(`width: ${img.width}`);
+    return img;
+  })
+  .then(function (img) {
+    // 第二個功能
+    alert(`height: ${img.height}`);
+  })
+  .catch(function (error) {
+    alert(error);
+  });
