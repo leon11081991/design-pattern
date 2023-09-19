@@ -368,3 +368,29 @@ park.out(car1);
 console.log("第二輛車離開");
 park.out(car2);
 */
+
+// 工廠模式
+class Product {
+  constructor(name) {
+    this.name = name;
+  }
+  init() {
+    alert("init");
+  }
+  fn1() {
+    alert("fn1");
+  }
+}
+
+class Creator {
+  create(name) {
+    return new Product(name);
+  }
+}
+
+// new 一個工廠
+let create = new Creator();
+// 透過工廠創一個 product
+let product = create.create("漢堡");
+product.init();
+product.fn1();
