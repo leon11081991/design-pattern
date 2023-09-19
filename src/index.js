@@ -369,6 +369,7 @@ console.log("第二輛車離開");
 park.out(car2);
 */
 
+/*
 // 工廠模式
 class Product {
   constructor(name) {
@@ -394,3 +395,29 @@ let create = new Creator();
 let product = create.create("漢堡");
 product.init();
 product.fn1();
+*/
+
+/*
+// 單例模式
+class singleObject {
+  login() {
+    console.log("login");
+  }
+}
+
+singleObject.getInstance = (function () {
+  // 使用閉包
+  let instance;
+  return function () {
+    if (!instance) {
+      instance = new singleObject();
+    }
+    return instance;
+  };
+})();
+
+// 注意：這裡 JS 只能使用靜態函式 getInstance，不能 new SingleObject()
+// 雖然不會報錯，但不符合我們需要的使用
+let obj = singleObject.getInstance();
+obj.login();
+*/
